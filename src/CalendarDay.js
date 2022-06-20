@@ -365,7 +365,11 @@ class CalendarDay extends Component {
         );
       });
 
-    return <View style={styles.dotsContainer}>{validDots}</View>;
+    return (
+      <View style={[styles.dotsContainer, { position: "absolute", bottom: 3 }]}>
+        {validDots}
+      </View>
+    );
   }
 
   renderLines(marking) {
