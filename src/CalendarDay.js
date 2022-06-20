@@ -13,6 +13,7 @@ import {
   Easing,
   LayoutAnimation,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import styles from "./Calendar.style.js";
 
@@ -512,6 +513,8 @@ class CalendarDay extends Component {
       ? { ...dayContainerStyle, ...highlightDateContainerStyle }
       : dayContainerStyle;
 
+    const marking = this.state.marking;
+
     let day;
     if (DayComponent) {
       day = <DayComponent {...this.props} {...this.state} />;
@@ -519,7 +522,7 @@ class CalendarDay extends Component {
       day = (
         <TouchableOpacity
           onPress={onDateSelected.bind(this, date)}
-          disabled={!enabled}
+          disabled={true}
         >
           <View
             style={[
@@ -578,7 +581,6 @@ class CalendarDay extends Component {
                 {marking.present && this.renderMarking()}
               </View>
             )}
-            {this.renderMarking()}
           </View>
         </TouchableOpacity>
       );
