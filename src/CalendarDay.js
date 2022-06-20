@@ -338,7 +338,7 @@ class CalendarDay extends Component {
     return (
       // default empty spacer
       <View style={styles.dotsContainer}>
-        <View style={[styles.dot]} />
+        {/* <View style={[styles.dot]} /> */}
       </View>
     );
   }
@@ -537,6 +537,7 @@ class CalendarDay extends Component {
                   (date.isoWeekday() === 6 || date.isoWeekday() === 7) && {
                     color: "#FF3030",
                   },
+                  marking.present && { color: "#006FE5" },
                 ]}
                 allowFontScaling={allowDayTextScaling}
               >
@@ -546,13 +547,35 @@ class CalendarDay extends Component {
               </Text>
             )}
             {showDayNumber && (
-              <View style={_dateNumberContainerStyle}>
-                <Text
-                  style={[{ fontSize: dateNumberFontSize }, _dateNumberStyle]}
-                  allowFontScaling={allowDayTextScaling}
-                >
-                  {date.date()}
-                </Text>
+              <View
+                style={[
+                  _dateNumberContainerStyle,
+                  {
+                    width: 30,
+                    height: 30,
+                    alignItems: "center",
+                    justifyContent: "center",
+                  },
+                ]}
+              >
+                {marking.booked ? (
+                  <Image
+                    style={{ width: 30, height: 30 }}
+                    source={require("./img/Date.png")}
+                  />
+                ) : (
+                  <Text
+                    style={[
+                      { fontSize: dateNumberFontSize },
+                      _dateNumberStyle,
+                      marking.present && { color: "#006FE5" },
+                    ]}
+                    allowFontScaling={allowDayTextScaling}
+                  >
+                    {date.date()}
+                  </Text>
+                )}
+                {marking.present && this.renderMarking()}
               </View>
             )}
             {this.renderMarking()}
