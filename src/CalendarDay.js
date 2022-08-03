@@ -427,6 +427,8 @@ class CalendarDay extends Component {
       dayComponent: DayComponent,
       scrollable,
       upperCaseDays,
+      disableOnPress,
+      dateNumberContainerStyle,
     } = this.props;
     const {
       enabled,
@@ -452,7 +454,7 @@ class CalendarDay extends Component {
       : [{ opacity: disabledDateOpacity }];
     let _customHighlightDateNameStyle;
     let _customHighlightDateNumberStyle;
-    let _dateNumberContainerStyle = [];
+    let _dateNumberContainerStyle = [dateNumberContainerStyle];
 
     if (customStyle) {
       _dateNameStyle.push(customStyle.dateNameStyle);
@@ -526,7 +528,8 @@ class CalendarDay extends Component {
       day = (
         <TouchableOpacity
           onPress={onDateSelected.bind(this, date)}
-          disabled={true}
+          disabled={disableOnPress}
+          activeOpacity={0.8}
         >
           <View
             style={[
